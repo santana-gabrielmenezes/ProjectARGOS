@@ -35,4 +35,9 @@ df_ferramentas_renamecolumns = df_ferramentas_dropcolumns.rename(columns= {'Text
                                                                            })
 df_ferramentas_renamecolumns
 # %%
-df_ferramentas_setor = df_ferramentas_renamecolumns['Centro custo'].
+df_ferramentas_renamecolumns['Centro custo'] = df_ferramentas_renamecolumns['Centro custo'].astype(str)
+df_ferramentas_renamecolumns.dtypes
+# %%
+df_ferramentas_renamecolumns['Setor'] = df_ferramentas_renamecolumns['Centro custo'].str[-3:]
+df_ferramentas_renamecolumns
+# %%

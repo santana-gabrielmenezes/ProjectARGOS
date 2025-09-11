@@ -17,24 +17,18 @@ df_producao
 # %%
 colunas_a_manter = {'Material' : 'Peca',
                     'Qtd.boa confirm.' : 'Producao',
-                    'Dt.entrada' : 'Data',
-                    'Hora' : 'Hora',
+                    'Data' : 'Data',
                     'CenTrab' : 'Setor',
                     'Turno': 'Turno'}
 # %%
 df_producao = (df_producao.rename(columns= lambda c : c.strip())
                           .rename(columns= colunas_a_manter)
-                          .assign(Setor= lambda c : c['Setor'].astype(str).str[:3])
+                          .assign(Setor= lambda c : c['Setor'].astype(str).str[:3],
+                                  Data= lambda df: pd.to_datetime(df['Dt.entrada'] + ' ' + df['Hora'], format='%Y-%m-%d %H:%M:%S')
+                                  )
                           .loc[:,colunas_a_manter.values()]
                           )
 df_producao
 # %%
-df_producao['Peca'].str[-2].str.isalpha()
-# %%
-condicao_F = df_producao['Peca'].str[-3] == 'F'
-df_producao.loc[condicao_F, 'Peca'] = df_producao['Peca'].str[:-3]
-
-condicao_letra = df_producao['Peca'].str[-2].str.isalpha()
-df_producao.loc[condicao_letra, 'Peca'] = df_producao['Peca'].str[:-2]
-df_producao
+df_producao.to_csv('producao_ordenado.csv',index=False)
 # %%

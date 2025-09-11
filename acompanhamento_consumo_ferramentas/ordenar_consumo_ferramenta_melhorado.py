@@ -1,7 +1,8 @@
 # %%
 import pandas as pd
 # %% Define as colunas a serem mantidas e as renomea
-colunas_a_manter = {'Texto breve material' : 'Descrição',
+colunas_a_manter = {'Material' : 'Codigo',
+                    'Texto breve material' : 'Descrição',
                     'Data de lançamento' : 'Data',
                     'Qtd.  UM registro' : 'Quantidade',
                     'Montante em MI' : 'Valor',
